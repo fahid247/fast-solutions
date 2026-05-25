@@ -16,7 +16,7 @@ export function LandingHero() {
   const { data: session } = useSession();
 
   return (
-    <section id="hero" className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden bg-transparent">
+    <section id="hero" className="relative w-full min-h-screen lg:h-screen flex flex-col items-center justify-start lg:justify-center pt-24 pb-12 lg:py-0 overflow-hidden bg-transparent">
       {/* Three.js canvas */}
       <HeroCanvas />
 
@@ -39,8 +39,7 @@ export function LandingHero() {
             transition={{ delay: 0.1, duration: 0.6 }}
             className="mb-6"
           >
-            <p className="text-xs md:text-sm tracking-[0.28em] uppercase font-light"
-              style={{ color: "rgba(255,255,255,0.6)" }}>
+            <p className="text-xs md:text-sm tracking-[0.28em] uppercase font-semibold sm:font-light text-white/80 sm:text-white/60">
               Premium Consulting &amp; Build Studio
             </p>
           </motion.div>
@@ -69,13 +68,11 @@ export function LandingHero() {
             SOLUTIONS
           </motion.p>
 
-          {/* Sub text */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.75, duration: 0.6 }}
-            className="mt-6 text-sm md:text-base max-w-lg lg:max-w-xl leading-relaxed font-medium"
-            style={{ color: "rgba(255,255,255,0.5)" }}
+            className="mt-6 text-sm md:text-base max-w-lg lg:max-w-xl leading-relaxed font-semibold sm:font-medium text-white/80 sm:text-white/50"
           >
             We plan, design, and build polished custom CMS portals and product-ready dashboards — with strict reliability and premium aesthetics.
           </motion.p>
@@ -123,7 +120,7 @@ export function LandingHero() {
             ].map((s) => (
               <div key={s.label} className="text-center lg:text-left">
                 <p className="text-lg md:text-2xl font-black" style={{ color: "#f97316" }}>{s.value}</p>
-                <p className="text-[9px] font-black uppercase tracking-widest mt-0.5" style={{ color: "rgba(255,255,255,0.3)" }}>{s.label}</p>
+                <p className="text-[9px] font-black uppercase tracking-widest mt-0.5 text-white/60 sm:text-white/30">{s.label}</p>
               </div>
             ))}
           </motion.div>

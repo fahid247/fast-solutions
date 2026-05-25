@@ -183,16 +183,74 @@ export default function HeroCanvas() {
     const particles = new THREE.Points(partGeo, partMat);
     scene.add(particles);
 
-    // ─── Mouse Parallax & Mesh Shift ─────────────────────────────────────────
+    // ─── Interactive Touch/Mouse Trail ────────────────────────────────────────
+    interface TrailParticle {
+      mesh: THREE.Mesh;
+      age: number;
+      maxAge: number;
+      velocity: THREE.Vector3;
+    }
+
+    const trailParticles: TrailParticle[] = [];
+    const TRAIL_COUNT = 40;
+    const trailGeometry = new THREE.IcosahedronGeometry(0.12, 0);
+    const trailMaterials = [
+      new THREE.MeshBasicMaterial({ color: 0xf97316, transparent: true }), // orange
+      new THREE.MeshBasicMaterial({ color: 0xa78bfa, transparent: true }), // violet
+      new THREE.MeshBasicMaterial({ color: 0x14b8a6, transparent: true }), // teal
+    ];
+
+    for (let i = 0; i < TRAIL_COUNT; i++) {
+      const mat = trailMaterials[i % trailMaterials.length].clone();
+      const mesh = new THREE.Mesh(trailGeometry, mat);
+      mesh.visible = false;
+      scene.add(mesh);
+      trailParticles.push({
+        mesh,
+        age: 0,
+        maxAge: 0,
+        velocity: new THREE.Vector3(),
+      });
+    }
+
+    const spawnTrailParticle = (mx: number, my: number) => {
+      const p = trailParticles.find((pt) => !pt.mesh.visible);
+      if (!p) return;
+
+      const aspect = window.innerWidth / window.innerHeight;
+      const factorX = aspect * 9.5;
+      const factorY = 9.5;
+
+      p.mesh.position.set(
+        mx * factorX + (Math.random() - 0.5) * 0.3,
+        my * factorY + (Math.random() - 0.5) * 0.3,
+        8
+      );
+
+      p.mesh.scale.setScalar(0.5 + Math.random() * 0.7);
+      p.mesh.visible = true;
+      p.age = 0;
+      p.maxAge = 30 + Math.floor(Math.random() * 20);
+      p.velocity.set(
+        (Math.random() - 0.5) * 0.04,
+        (Math.random() - 0.5) * 0.04 + 0.015,
+        (Math.random() - 0.5) * 0.02
+      );
+    };
+
+    // ─── Mouse/Touch Parallax & Mesh Shift ────────────────────────────────────
     const mouse = { x: 0, y: 0 };
 
     const setMeshPosition = () => {
       if (window.innerWidth >= 1280) {
         meshGroup.position.x = 5.8;
+        meshGroup.position.y = 0;
       } else if (window.innerWidth >= 1024) {
         meshGroup.position.x = 4.8;
+        meshGroup.position.y = 0;
       } else {
         meshGroup.position.x = 0;
+        meshGroup.position.y = 3.2; // Shift to the top on mobile
       }
     };
     setMeshPosition();
@@ -202,8 +260,31 @@ export default function HeroCanvas() {
     const onMove = (e: MouseEvent) => {
       mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
       mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+      spawnTrailParticle(mouse.x, mouse.y);
     };
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mouse.x = (touch.clientX / window.innerWidth - 0.5) * 2;
+        mouse.y = -(touch.clientY / window.innerHeight - 0.5) * 2;
+        spawnTrailParticle(mouse.x, mouse.y);
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+        mouse.x = (touch.clientX / window.innerWidth - 0.5) * 2;
+        mouse.y = -(touch.clientY / window.innerHeight - 0.5) * 2;
+        spawnTrailParticle(mouse.x, mouse.y);
+        spawnTrailParticle(mouse.x, mouse.y); // Spawn double for touch to make it richer
+      }
+    };
+
     window.addEventListener("mousemove", onMove);
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
 
     // ─── Resize ───────────────────────────────────────────────────────────────
     const onResize = () => {
@@ -245,6 +326,22 @@ export default function HeroCanvas() {
       particles.rotation.y = t * 0.015;
       particles.rotation.x = t * 0.005;
 
+      // Update trail particles
+      trailParticles.forEach((p) => {
+        if (!p.mesh.visible) return;
+        p.age++;
+        if (p.age >= p.maxAge) {
+          p.mesh.visible = false;
+        } else {
+          p.mesh.position.add(p.velocity);
+          const pct = p.age / p.maxAge;
+          p.mesh.scale.setScalar(1 - pct);
+          if (p.mesh.material instanceof THREE.Material) {
+            p.mesh.material.opacity = (1 - pct) * 0.85;
+          }
+        }
+      });
+
       renderer.render(scene, camera);
     };
     animate();
@@ -253,7 +350,16 @@ export default function HeroCanvas() {
     return () => {
       cancelAnimationFrame(frameId);
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("resize", onResize);
+      
+      trailGeometry.dispose();
+      trailParticles.forEach((p) => {
+        if (p.mesh.material instanceof THREE.Material) {
+          p.mesh.material.dispose();
+        }
+      });
       renderer.dispose();
     };
   }, []);
@@ -261,7 +367,7 @@ export default function HeroCanvas() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none opacity-45 lg:opacity-100 transition-opacity duration-300"
       style={{ zIndex: 0 }}
     />
   );
