@@ -16,7 +16,7 @@ export function LandingHero() {
   const { data: session } = useSession();
 
   return (
-    <section id="hero" className="relative w-full min-h-screen lg:h-screen flex flex-col items-center justify-start lg:justify-center pt-24 pb-12 lg:py-0 overflow-hidden bg-transparent">
+    <section id="hero" className="relative w-full min-h-[82vh] sm:min-h-[85vh] lg:min-h-0 lg:h-screen flex flex-col items-center justify-center pt-20 pb-16 lg:py-0 overflow-hidden bg-transparent">
       {/* Three.js canvas */}
       <HeroCanvas />
 
@@ -37,7 +37,7 @@ export function LandingHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.6 }}
-            className="mb-6"
+            className="mb-4 lg:mb-6"
           >
             <p className="text-xs md:text-sm tracking-[0.28em] uppercase font-semibold sm:font-light text-white/80 sm:text-white/60">
               Premium Consulting &amp; Build Studio
@@ -72,7 +72,7 @@ export function LandingHero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.75, duration: 0.6 }}
-            className="mt-6 text-sm md:text-base max-w-lg lg:max-w-xl leading-relaxed font-semibold sm:font-medium text-white/80 sm:text-white/50"
+            className="mt-4 lg:mt-6 text-sm md:text-base max-w-lg lg:max-w-xl leading-relaxed font-semibold sm:font-medium text-white/80 sm:text-white/50"
           >
             We plan, design, and build polished custom CMS portals and product-ready dashboards — with strict reliability and premium aesthetics.
           </motion.p>
@@ -82,7 +82,7 @@ export function LandingHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
-            className="mt-8 flex flex-col sm:flex-row items-center gap-4"
+            className="mt-6 lg:mt-8 flex flex-col sm:flex-row items-center gap-4"
           >
             {session ? (
               <Link href="/dashboard"
@@ -111,7 +111,7 @@ export function LandingHero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.05, duration: 0.5 }}
-            className="mt-10 flex items-center justify-center lg:justify-start gap-8 md:gap-12"
+            className="mt-8 lg:mt-10 flex items-center justify-center lg:justify-start gap-8 md:gap-12"
           >
             {[
               { value: "2–14 days", label: "Avg. Launch" },
@@ -136,7 +136,7 @@ export function LandingHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3, duration: 0.5 }}
-        className="absolute bottom-10 z-10 flex items-center gap-5 tracking-[0.35em] text-[11px] uppercase transition-colors group"
+        className="absolute bottom-6 sm:bottom-10 z-10 flex items-center gap-5 tracking-[0.35em] text-[11px] uppercase transition-colors group"
         style={{ color: "rgba(255,255,255,0.4)" }}
       >
         <span className="w-12 h-[1px] transition-all duration-300 group-hover:w-20" style={{ background: "rgba(255,255,255,0.2)" }} />
