@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -55,9 +55,7 @@ export default function RegisterPage() {
   if (success) {
     return (
       <div className="min-h-screen mesh-bg flex flex-col items-center justify-center p-4 transition-colors duration-300">
-        <div className="absolute top-6 right-6 z-50">
-          <ThemeToggle />
-        </div>
+
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center max-w-md">
           <div className="w-20 h-20 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-8 shadow-[0_0_20px_rgba(234,88,12,0.15)]">
             <CheckCircle2 className="w-10 h-10 text-primary" />
@@ -78,20 +76,22 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen mesh-bg flex flex-col items-center justify-center p-4 relative overflow-hidden transition-colors duration-300">
-      <div className="absolute top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
+
 
       <div className="absolute top-20 right-20 w-[400px] h-[400px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-20 left-20 w-[300px] h-[300px] bg-accent/10 blur-[120px] rounded-full pointer-events-none" />
 
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="w-full max-w-md z-10">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-3 mb-4">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/30">
-              <span className="text-white font-black text-2xl italic">F</span>
+          <Link href="/" className="inline-flex items-center gap-3.5 mb-4 group justify-center">
+            <div className="w-14 h-14 rounded-2xl overflow-hidden flex items-center justify-center shadow-[0_0_30px_rgba(234,88,12,0.15)] group-hover:scale-105 transition-transform duration-300 border border-border bg-card/50 dark:bg-white/[0.02]">
+              <img
+                src="/logo.png"
+                alt="Fast Solutions Logo"
+                className="w-full h-full object-cover object-top scale-[1.35] origin-top transform dark:invert dark:hue-rotate-180"
+              />
             </div>
-            <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase">
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tighter text-foreground uppercase select-none">
               Fast <span className="text-primary">Solutions</span>
             </h1>
           </Link>

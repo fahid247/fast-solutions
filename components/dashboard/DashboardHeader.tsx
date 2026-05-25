@@ -15,7 +15,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { formatDistanceToNow } from "date-fns";
 import { useSidebar } from "./DashboardSidebar";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 import Image from "next/image";
 import { useNotifications } from "@/hooks/useNotifications";
 
@@ -100,7 +100,7 @@ export function DashboardHeader() {
           </div>
 
           {/* Theme Toggle */}
-          <ThemeToggle />
+
 
           {/* Notifications Dropdown */}
           <DropdownMenu>

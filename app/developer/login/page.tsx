@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Loader2, ArrowRight } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 
 export default function DeveloperLoginPage() {
   const router = useRouter();
@@ -44,10 +44,7 @@ export default function DeveloperLoginPage() {
       {/* Background Grids & Orbs */}
       <div className="absolute inset-0 grid-texture opacity-10 dark:opacity-25 pointer-events-none" />
       
-      {/* Theme Toggle Top Right */}
-      <div className="absolute top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
+
 
       {/* Large Glowing Radial Orbs */}
       <div 
@@ -71,11 +68,15 @@ export default function DeveloperLoginPage() {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-3 mb-4 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#EA580C] to-[#8B5CF6] flex items-center justify-center shadow-[0_0_30px_rgba(234,88,12,0.3)] group-hover:scale-105 transition-transform duration-300">
-              <span className="text-white font-black text-2xl italic">F</span>
+          <Link href="/" className="inline-flex items-center gap-3.5 mb-4 group justify-center">
+            <div className="w-14 h-14 rounded-2xl overflow-hidden flex items-center justify-center shadow-[0_0_30px_rgba(234,88,12,0.15)] group-hover:scale-105 transition-transform duration-300 border border-border bg-card/50 dark:bg-white/[0.02]">
+              <img
+                src="/logo.png"
+                alt="Fast Solutions Logo"
+                className="w-full h-full object-cover object-top scale-[1.35] origin-top transform dark:invert dark:hue-rotate-180"
+              />
             </div>
-            <h1 className="text-3xl font-black tracking-tighter text-foreground uppercase">
+            <h1 className="text-3xl sm:text-4xl font-black tracking-tighter text-foreground uppercase select-none">
               Fast <span className="text-[#EA580C]">Solutions</span>
             </h1>
           </Link>

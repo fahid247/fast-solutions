@@ -206,6 +206,54 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  /* ── Landing Page Dark Scope ── */
+  .landing-dark {
+    color-scheme: dark;
+  }
+
+  /* ── Nav underline hover ── */
+  .nav-underline {
+    position: relative;
+  }
+  .nav-underline::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: #f97316;
+    transition: width 0.3s ease;
+    border-radius: 9999px;
+  }
+  .nav-underline:hover::after {
+    width: 100%;
+  }
+
+  /* ── Aurora glow animation ── */
+  @keyframes aurora {
+    0%, 100% { opacity: 0.06; transform: scale(1) translateX(0); }
+    50%       { opacity: 0.12; transform: scale(1.08) translateX(2%); }
+  }
+  .animate-aurora {
+    animation: aurora 8s ease-in-out infinite;
+  }
+
+  /* ── Enhanced marquee ── */
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+
+  /* ── Particle float ── */
+  @keyframes float-particle {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-8px); }
+  }
 }
 
 
@@ -218,6 +266,10 @@
   }
   html {
     @apply font-sans antialiased;
+    scroll-behavior: smooth;
+  }
+  section[id] {
+    scroll-margin-top: 80px;
   }
 }
 

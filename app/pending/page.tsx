@@ -4,15 +4,12 @@ import { motion } from "framer-motion";
 import { Clock, Mail, Shield } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 
 export default function PendingPage() {
   return (
     <div className="min-h-screen mesh-bg flex flex-col items-center justify-center p-4 relative overflow-hidden transition-colors duration-300">
-      {/* Theme Toggle Top Right */}
-      <div className="absolute top-6 right-6 z-50">
-        <ThemeToggle />
-      </div>
+
 
       {/* Background glows */}
       <div className="absolute top-20 left-20 w-[400px] h-[400px] bg-primary/10 blur-[150px] rounded-full pointer-events-none" />
@@ -44,12 +41,18 @@ export default function PendingPage() {
         </div>
 
         {/* Logo */}
-        <div className="inline-flex items-center space-x-3 mb-6">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/30">
-            <span className="text-white font-black text-xl italic">F</span>
+        <div className="inline-flex items-center gap-3.5 mb-6">
+          <div className="w-12 h-12 rounded-2xl overflow-hidden flex items-center justify-center shadow-xl shrink-0"
+            style={{ border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)" }}>
+            <img
+              src="/logo.png"
+              alt="Fast Solutions Logo"
+              className="w-full h-full object-cover object-top scale-[1.35] origin-top transform"
+              style={{ filter: "invert(1) hue-rotate(180deg) brightness(1.25) contrast(1.15)" }}
+            />
           </div>
-          <h1 className="text-3xl font-black tracking-tighter text-foreground uppercase">
-            Fast <span className="text-primary">Solutions</span>
+          <h1 className="text-3xl font-black tracking-tighter text-foreground uppercase select-none">
+            FAST <span className="text-primary">SOLUTIONS</span>
           </h1>
         </div>
 

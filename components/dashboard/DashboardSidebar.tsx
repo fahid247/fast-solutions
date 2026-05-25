@@ -163,12 +163,18 @@ export function DashboardSidebar() {
       >
         {/* Header */}
         <div className={cn("p-6 flex items-center", collapsed ? "justify-center" : "justify-between")}>
-          <Link href="/" className="flex items-center space-x-2.5 shrink-0">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-[0_0_25px_rgba(234,88,12,0.3)] shrink-0">
-              <span className="text-white font-black text-lg italic">F</span>
+          <Link href="/" className="flex items-center gap-2.5 shrink-0">
+            <div className="w-9 h-9 rounded-xl overflow-hidden flex items-center justify-center shadow-lg shrink-0"
+              style={{ border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)" }}>
+              <img
+                src="/logo.png"
+                alt="Fast Solutions Logo"
+                className="w-full h-full object-cover object-top scale-[1.35] origin-top transform"
+                style={{ filter: "invert(1) hue-rotate(180deg) brightness(1.25) contrast(1.15)" }}
+              />
             </div>
             {!collapsed && (
-              <h1 className="text-xl font-black tracking-[-0.05em] text-foreground">
+              <h1 className="text-lg font-black tracking-tighter text-foreground uppercase select-none">
                 FAST <span className="text-primary">SOLUTIONS</span>
               </h1>
             )}

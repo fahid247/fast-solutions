@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/ui/ThemeToggle";
+
 
 // Map slugs to standard Lucide icons
 const iconMap: Record<string, any> = {
@@ -449,12 +449,18 @@ export default function ServicePage() {
       {/* Navigation Header */}
       <header className="border-b border-border/40 bg-background/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#EA580C] to-[#8B5CF6] flex items-center justify-center shadow-[0_0_20px_rgba(234,88,12,0.3)]">
-              <span className="text-white font-black text-lg italic">F</span>
+          <Link href="/#hero" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center shadow-lg shrink-0"
+              style={{ border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.02)" }}>
+              <img
+                src="/logo.png"
+                alt="Fast Solutions Logo"
+                className="w-full h-full object-cover object-top scale-[1.35] origin-top transform"
+                style={{ filter: "invert(1) hue-rotate(180deg) brightness(1.25) contrast(1.15)" }}
+              />
             </div>
-            <span className="text-xl font-black tracking-[-0.05em] text-foreground uppercase">
-              Fast <span className="text-primary">Solutions</span>
+            <span className="text-base font-black tracking-wider text-foreground uppercase select-none" style={{ fontFamily: "var(--font-outfit), sans-serif" }}>
+              FAST<span style={{ color: "#EA580C" }}> SOLUTIONS</span>
             </span>
           </Link>
           
@@ -462,7 +468,7 @@ export default function ServicePage() {
             <Link href="/" className="text-xs font-bold text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1.5 bg-secondary border border-border/40 px-3.5 py-2 rounded-xl">
               <ArrowLeft className="w-3.5 h-3.5" /> Back Home
             </Link>
-            <ThemeToggle />
+
           </div>
         </div>
       </header>
